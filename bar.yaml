@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-deployment
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bar
+  template:
+    metadata:
+      labels:
+        app: bar
+    spec:
+      containers:
+      - name: bar-api
+        image: asia.gcr.io/master-streamer-377312/bar:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        # resources:
+        #   limits:
+        #     cpu: 10m
+        #     memory: 20Mi
+        #   requests:
+        #     cpu: 10m
+        #     memory: 20Mi
+      imagePullSecrets:
+      - name: gcr-secret

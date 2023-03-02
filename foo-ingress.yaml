@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: foo
+  namespace: dev
+
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      paths:
+      - path: /foo
+        pathType: Prefix
+        backend:
+          service:
+            name: foo-service
+            port:
+              number: 80
+      - path: /api/bar
+        pathType: Prefix
+        backend:
+          service:
+            name: foo-service
+            port:
+              number: 80
